@@ -15,14 +15,10 @@ The product will be a functional game, available on the Andriod Store.
 
 
 | Date          | Deliverable   																			   |
-| ------------- | -------------------------------------------------------------------------------------------- |
-| Feburary 5	| Minimum viable product	(Playtest)														   |
-| February 12	| Refined Prototype	(More Playtest)															   |
-| February 19	| Begin work on final version																   |
-| February 26   | Should be past prototype, fully written up mechanics.  Part of the way through final version |
-| April 1       | Finished implimenting all features														   |
-| April 2-28    | FIX EVERYTHING																			   |
-| April 29      | Begin working on art, probably still more to fix though									   |
+| ------------- | ---------------------------------------------------------------------------------------------|												
+| February 26   | Minimum viable product                                                                       |
+| April 1       | part of way through final - all basic features implimented								   |
+| April 29      | all features implimented, time to fix and publish     									   |
 
 ## Reality Check
 Tools I plan on using and cost:
