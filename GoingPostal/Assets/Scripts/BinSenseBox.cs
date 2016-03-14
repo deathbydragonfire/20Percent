@@ -13,11 +13,6 @@ public class BinSenseBox : MonoBehaviour {
 	    
 	}
 
-    void OnTriggerEnter(Collider other)
-    {
-        GameObject obj = other.gameObject;
-        Debug.Log(obj.name);
-        obj.SendMessage("touchBin", transform.GetComponent<BoxCollider>());
-    }
+    
     
 }

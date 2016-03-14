@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BeltMoves.cs" />
      <Compile Include="Assets\Scripts\BinSenseBox.cs" />
+     <Compile Include="Assets\Scripts\SpawnBoxes.cs" />
      <Compile Include="Assets\Scripts\Touch.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">

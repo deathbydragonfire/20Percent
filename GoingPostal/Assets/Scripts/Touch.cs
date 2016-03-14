@@ -3,21 +3,15 @@ using System.Collections;
 
 public class Touch : MonoBehaviour {
 
+    
     bool selected; //true when box is being touched
     public bool followTrack = true; //for testing, can disable movement of box along track
     float trackX; //X position when following track
     float trackY; //Y position when following track
     public float speed = 0.1f; //Speed of box while following track (Should be same as track speed for best result)
 
-    void touchBin(Collider other)
-    {
-        GameObject obj = other.gameObject;
-        if (selected)
-        {
-            Debug.Log("In Bin");
-        }
-    }
-
+   
+   
 	void Start () {
         selected = false;  
         if (followTrack)
