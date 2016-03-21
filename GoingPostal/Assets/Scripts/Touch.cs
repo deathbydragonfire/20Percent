@@ -18,6 +18,7 @@ public class Touch : MonoBehaviour {
         {
             trackX = -8.5f; //Sets start X position at -8.5
             trackY = Random.Range(-2.3f, -1.0f); //Sets starting Y position between -2.3 and -1
+            transform.position = new Vector3(trackX, trackY, 1 - trackY);
         }
 	}
 
@@ -46,6 +47,10 @@ public class Touch : MonoBehaviour {
         {
             trackX += speed; //Change X by speed
             transform.position = new Vector2(trackX, trackY); //move box along track
+        }
+        else if (trackX > 8.5f)
+        {
+            Destroy(gameObject);
         }
         //Debug.Log(test + " " + selected);
 	}

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BinSenseBox : MonoBehaviour {
 
+    
 	// Use this for initialization
 	void Start () {
 	
@@ -13,6 +14,9 @@ public class BinSenseBox : MonoBehaviour {
 	    
 	}
 
-    
+    void onCollisonEnter(Collision collide)
+    {
+        print("COLLIDE");
+    }
     
 }
