@@ -4,12 +4,13 @@ using System.Threading;
 
 public class SpawnBoxes : MonoBehaviour {
     public bool spawnActive = true;
-    public int frequency = 50; // between 1 and 100, lower numbers = higher frequency
+    public int frequency = 900; // between 1 and 1000, lower numbers = higher frequency
     public Transform redBox;
     public Transform blueBox;
     public Transform greenBox;
     public Transform purpleBox;
     public Transform orangeBox;
+    private int wait = 0;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,37 +18,50 @@ public class SpawnBoxes : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        int color = Random.Range(1, 5);
-        int time = Random.Range(1, 100);
-        if (time > frequency)
+        if (spawnActive)
         {
-            switch (color)
+            int color = Random.Range(1, 5);
+            int time = Random.Range(1, 1000);
+            //print(wait + " " + time);
+            if ((time > frequency) && (wait <= 0))
             {
-                case 1:
-                    {
-                        Instantiate(redBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                        break;
-                    }
-                case 2:
-                    {
-                        Instantiate(blueBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                        break;
-                    }
-                case 3:
-                    {
-                        Instantiate(greenBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                        break;
-                    }
-                case 4:
-                    {
-                        Instantiate(purpleBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                        break;
-                    }
-                case 5:
-                    {
-                        Instantiate(orangeBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                        break;
-                    }
+                switch (color)
+                {
+                    case 1:
+                        {
+                            Instantiate(redBox, new Vector3(-8, -1, -1), Quaternion.identity);
+                            wait = 20;
+                            break;
+                        }
+                    case 2:
+                        {
+                            Instantiate(blueBox, new Vector3(-8, -1, -1), Quaternion.identity);
+                            wait = 20;
+                            break;
+                        }
+                    case 3:
+                        {
+                            Instantiate(greenBox, new Vector3(-8, -1, -1), Quaternion.identity);
+                            wait = 20;
+                            break;
+                        }
+                    case 4:
+                        {
+                            Instantiate(purpleBox, new Vector3(-8, -1, -1), Quaternion.identity);
+                            wait = 20;
+                            break;
+                        }
+                    case 5:
+                        {
+                            Instantiate(orangeBox, new Vector3(-8, -1, -1), Quaternion.identity);
+                            wait = 20;
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                wait--;
             }
         }
 	}

@@ -4,7 +4,8 @@ using System.Collections;
 public class Touch : MonoBehaviour {
 
     
-    bool selected; //true when box is being touched
+    bool selected; //box selected
+    bool isThis;
     public bool followTrack = true; //for testing, can disable movement of box along track
     float trackX; //X position when following track
     float trackY; //Y position when following track
@@ -13,7 +14,8 @@ public class Touch : MonoBehaviour {
    
    
 	void Start () {
-        selected = false;  
+        selected = false;
+        isThis = false;
         if (followTrack)
         {
             trackX = -8.5f; //Sets start X position at -8.5
@@ -25,25 +27,32 @@ public class Touch : MonoBehaviour {
     
 	void Update () {
         //test++;
+        RaycastHit hit;
         if (Input.touchCount > 0) //If there is a touch
         {
+            
             Vector3 pos = Input.GetTouch(0).position; //Get its position
             //Debug.Log("Touch " + pos);
 
             Ray ray = Camera.main.ScreenPointToRay(pos); //check to see if it is colliding with the box
-            if (Physics.Raycast(ray)) //if it is
+            if (Physics.Raycast(ray, out hit)) //if it is
             {
-
-                transform.position = new Vector2(Camera.main.ScreenToWorldPoint(pos).x, Camera.main.ScreenToWorldPoint(pos).y); //Move box to that position
+                
+                hit.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(pos).x, Camera.main.ScreenToWorldPoint(pos).y); //Move box to that position
                 selected = true;
+                if (hit.transform == transform)
+                {
+                    isThis = true;
+                }
+                else { isThis = false; }
                 //Debug.Log("Something hit " + Camera.main.ScreenToWorldPoint(pos));
             }
-            else { selected = false; }
+            else { selected = false; isThis = false; }
 
         }
-        else { selected = false; }
+        else { selected = false; isThis = false; }
 
-        if ((!selected)&&(trackX < 8.5f)&&followTrack) //if not selected, on the screen, and movement is enabled
+        if ((!selected)&&(!isThis)&&(trackX < 8.5f)&&followTrack) //if not selected, on the screen, and movement is enabled
         {
             trackX += speed; //Change X by speed
             transform.position = new Vector2(trackX, trackY); //move box along track
