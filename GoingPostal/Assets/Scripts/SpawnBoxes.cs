@@ -30,31 +30,31 @@ public class SpawnBoxes : MonoBehaviour {
                     case 1:
                         {
                             Instantiate(redBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                            wait = 20;
+                            wait = 50;
                             break;
                         }
                     case 2:
                         {
                             Instantiate(blueBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                            wait = 20;
+                            wait = 50;
                             break;
                         }
                     case 3:
                         {
                             Instantiate(greenBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                            wait = 20;
+                            wait = 50;
                             break;
                         }
                     case 4:
                         {
                             Instantiate(purpleBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                            wait = 20;
+                            wait = 50;
                             break;
                         }
                     case 5:
                         {
                             Instantiate(orangeBox, new Vector3(-8, -1, -1), Quaternion.identity);
-                            wait = 20;
+                            wait = 50;
                             break;
                         }
                 }

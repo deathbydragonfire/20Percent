@@ -51,8 +51,8 @@ public class Touch : MonoBehaviour {
 
         }
         else { selected = false; isThis = false; }
-
-        if ((!selected)&&(!isThis)&&(trackX < 8.5f)&&followTrack) //if not selected, on the screen, and movement is enabled
+        if (!isThis) { selected = false; }
+        if ((!selected)&&(trackX < 8.5f)&&followTrack) //if not selected, on the screen, and movement is enabled
         {
             trackX += speed; //Change X by speed
             transform.position = new Vector2(trackX, trackY); //move box along track

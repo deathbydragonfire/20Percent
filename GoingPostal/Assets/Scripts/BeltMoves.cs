@@ -10,7 +10,7 @@ public class BeltMoves : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.position.x < 8.0f) { transform.position = new Vector2(transform.position.x + 1.0f* speed, transform.position.y);}
-        else { transform.position = new Vector2(-8.0f, -2.38f); }
+        if (transform.position.x < 6.75f) { transform.position = new Vector2(transform.position.x + 1.0f * speed, transform.position.y); }
+        else { transform.position = new Vector2(-6.75f, -2.38f); }
 	}
 }
