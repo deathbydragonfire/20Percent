@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\SpawnBoxes.cs" />
      <Compile Include="Assets\Scripts\Touch.cs" />
      <Compile Include="Assets\Scripts\Utility.cs" />
+     <Compile Include="Assets\Scripts\lifeBar.cs" />
      <Compile Include="Assets\Scripts\moveButtons.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">
