@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Touch : MonoBehaviour {
 
-    
+   
     bool selected; //box selected
     bool isThis;
     public bool followTrack = true; //for testing, can disable movement of box along track
@@ -59,6 +59,7 @@ public class Touch : MonoBehaviour {
         }
         else if (trackX > 8.5f)
         {
+            GameObject.Find("LifeBar").SendMessage("onLifeDown");
             Destroy(gameObject);
         }
         //Debug.Log(test + " " + selected);
