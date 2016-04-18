@@ -20,7 +20,7 @@ public class moveButtons : MonoBehaviour {
         
         if (GUI.Button(new Rect(20, 20, 50, 50), btnTexL, new GUIStyle()))
         {
-            print("leftDwn");
+            
             startTime = Time.time;
             journeyLength = Vector3.Distance(transform.position, new Vector3 (-2, 0, -10));
             leftDwn = true;
@@ -44,7 +44,6 @@ public class moveButtons : MonoBehaviour {
         }
         else if (leftDwn)
         {
-            print("LEFT");
             float distCovered = (Time.time - startTime) * speed;
             float fracJourney = distCovered / journeyLength;
             transform.position = Vector3.Lerp(transform.position, new Vector3(-2, 0, -10), fracJourney);

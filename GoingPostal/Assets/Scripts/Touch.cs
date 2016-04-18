@@ -3,7 +3,9 @@ using System.Collections;
 
 public class Touch : MonoBehaviour {
 
-   
+    public Vector2 binPosition;
+    public float toleranceX;
+    public float toleranceY;
     bool selected; //box selected
     bool isThis;
     public bool followTrack = true; //for testing, can disable movement of box along track
@@ -14,12 +16,13 @@ public class Touch : MonoBehaviour {
    
    
 	void Start () {
+        
         selected = false;
         isThis = false;
         if (followTrack)
         {
             trackX = -8.5f; //Sets start X position at -8.5
-            trackY = Random.Range(-2.3f, -1.0f); //Sets starting Y position between -2.3 and -1
+            trackY = Random.Range(-2.3f, -1.1f); //Sets starting Y position between -2.3 and -1
             transform.position = new Vector3(trackX, trackY, 1 - trackY);
         }
 	}
@@ -42,6 +45,7 @@ public class Touch : MonoBehaviour {
                 selected = true;
                 if (hit.transform == transform)
                 {
+                    if (overBin()) { GameObject.Find("mailRed2").SendMessage("boxOver"); print("OVER"); }
                     isThis = true;
                 }
                 else { isThis = false; }
@@ -64,4 +68,12 @@ public class Touch : MonoBehaviour {
         }
         //Debug.Log(test + " " + selected);
 	}
+    bool overBin()
+    {
+        if ((System.Math.Abs(transform.position.x - binPosition.x) <= toleranceX) && ((transform.position.y - binPosition.y) <= toleranceY))
+        {
+            return true;
+        }
+        else { return false; }
+    }
 }

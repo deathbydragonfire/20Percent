@@ -2,21 +2,28 @@
 using System.Collections;
 
 public class BinSenseBox : MonoBehaviour {
-
-    
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-	}
-
-    void onCollisonEnter(Collision collide)
+    SpriteRenderer sr;
+    bool isOver = false;
+    void Start()
     {
-        print("COLLIDE");
+        GameObject go = transform.gameObject;
+        sr = go.GetComponent<SpriteRenderer>();
+        sr.color = new Color(255, 255, 255);
+    }
+    void Update()
+    {
+        if (isOver)
+        {
+            sr.color = new Color(152, 152, 152);
+        }
+        else
+        {
+            sr.color = new Color(255, 255, 255);
+        }
+    }
+    void boxOver()
+    {
+        isOver = true;
     }
     
 }
