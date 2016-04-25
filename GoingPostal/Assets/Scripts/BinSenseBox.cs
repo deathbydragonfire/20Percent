@@ -3,7 +3,9 @@ using System.Collections;
 
 public class BinSenseBox : MonoBehaviour {
     SpriteRenderer sr;
-    bool isOver = false;
+    public int binColor;
+    GameObject temp;
+
     void Start()
     {
         GameObject go = transform.gameObject;
@@ -12,18 +14,21 @@ public class BinSenseBox : MonoBehaviour {
     }
     void Update()
     {
-        if (isOver)
-        {
-            sr.color = new Color(152, 152, 152);
-        }
-        else
-        {
-            sr.color = new Color(255, 255, 255);
-        }
+        
+            //sr.color = new Color(255, 255, 255);
+        
+    }
+    void findBox(GameObject box)
+    {
+        temp = box;
     }
     void boxOver()
     {
-        isOver = true;
+        temp.SendMessage("checkColor", binColor);
+    }
+    void getPosition()
+    {
+        temp.SendMessage("acceptPosition", transform.position);
     }
     
 }

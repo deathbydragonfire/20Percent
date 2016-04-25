@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class moveButtons : MonoBehaviour {
+    
+    public float frequency = 1000;
     public Texture btnTexL;
     public Texture btnTexR;
     public float speed = 1.0f;
@@ -12,12 +14,12 @@ public class moveButtons : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         startTime = Time.time;
+        
 	}
 	
 	// Update is called once per frame
     void OnGUI()
     {
-        
         if (GUI.Button(new Rect(20, 20, 50, 50), btnTexL, new GUIStyle()))
         {
             
@@ -33,6 +35,7 @@ public class moveButtons : MonoBehaviour {
         }
     }
 	void Update () {
+       
         if (transform.position.x >= 1.95f) { rightDwn = false; }
         if (transform.position.x <= -1.95f) { leftDwn = false; }
         if (rightDwn)

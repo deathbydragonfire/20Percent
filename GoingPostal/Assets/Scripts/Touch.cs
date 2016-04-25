@@ -3,7 +3,20 @@ using System.Collections;
 
 public class Touch : MonoBehaviour {
 
-    public Vector2 binPosition;
+    SpriteRenderer sr;
+    public Sprite red;
+    public Sprite blue;
+    public Sprite green;
+    public Sprite purple;
+    public Sprite orange;
+    string binName;
+    int color;
+    /* public Vector2 binR;
+    public Vector2 binB;
+    public Vector2 binG;
+    public Vector2 binP;
+    public Vector2 binO; */
+    Vector2 binPosition;
     public float toleranceX;
     public float toleranceY;
     bool selected; //box selected
@@ -13,10 +26,38 @@ public class Touch : MonoBehaviour {
     float trackY; //Y position when following track
     public float speed = 0.1f; //Speed of box while following track (Should be same as track speed for best result)
 
+
    
-   
+
 	void Start () {
-        
+        GameObject go = transform.gameObject;
+        sr = go.GetComponent<SpriteRenderer>();
+
+        if (sr.sprite == red) {
+            color = 1;
+            //binPosition = binR;
+            binName = "barRed";  //must name exactly this in hirarchy!!!!!!
+        } else if (sr.sprite == blue) {
+            color = 2;
+            //binPosition = binB;
+            binName = "barBlue";  //must name exactly this in hirarchy!!!!!!
+        } else if (sr.sprite == green) {
+            color = 3;
+            //binPosition = binG;
+            binName = "barGreen";  //must name exactly this in hirarchy!!!!!!
+        } else if (sr.sprite == purple) {
+            color = 4;
+            //binPosition = binP;
+            binName = "barPurple";  //must name exactly this in hirarchy!!!!!!
+        } else if (sr.sprite == orange) {
+            color = 5;
+            //binPosition = binO;
+            binName = "barOrange";  //must name exactly this in hirarchy!!!!!!
+        }
+        else { color = -1; }
+        print(transform.gameObject);
+        //GameObject.Find(binName).SendMessage("findBox", transform.gameObject);
+        GameObject.Find("binBlue").SendMessage("getPosition");
         selected = false;
         isThis = false;
         if (followTrack)
@@ -27,9 +68,13 @@ public class Touch : MonoBehaviour {
         }
 	}
 
-    
+    void acceptPosition(Vector2 pos)
+    {
+        binPosition = pos;
+    }
 	void Update () {
         //test++;
+        
         RaycastHit hit;
         if (Input.touchCount > 0) //If there is a touch
         {
@@ -45,7 +90,8 @@ public class Touch : MonoBehaviour {
                 selected = true;
                 if (hit.transform == transform)
                 {
-                    if (overBin()) { GameObject.Find("mailRed2").SendMessage("boxOver"); print("OVER"); }
+                    print("hit");
+                    if (overBin()) { GameObject.Find(binName).SendMessage("boxOver", transform.gameObject); }
                     isThis = true;
                 }
                 else { isThis = false; }
@@ -75,5 +121,27 @@ public class Touch : MonoBehaviour {
             return true;
         }
         else { return false; }
+    }
+
+    //methods to be called by other gameObjects
+
+    void speedUp()
+    {
+        speed += .01f;
+    }
+
+    void speedDown()
+    {
+        speed -= .01f;
+    }
+    void checkColor(int col)
+    {
+        bool good = false;
+        while (Input.touchCount < 0) { good = overBin(); }
+        if ((col == color) && good)
+        {
+            GameObject.Find("LifeBar").SendMessage("onLifeUp");
+            Destroy(gameObject);
+        }
     }
 }
