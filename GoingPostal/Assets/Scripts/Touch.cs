@@ -2,14 +2,15 @@
 using System.Collections;
 
 public class Touch : MonoBehaviour {
-
+    bool exists = true;
+    bool wasThis = false;
     SpriteRenderer sr;
     public Sprite red;
     public Sprite blue;
     public Sprite green;
     public Sprite purple;
     public Sprite orange;
-    string binName;
+    GameObject rightBin;
     int color;
     /* public Vector2 binR;
     public Vector2 binB;
@@ -30,34 +31,34 @@ public class Touch : MonoBehaviour {
    
 
 	void Start () {
+       
         GameObject go = transform.gameObject;
         sr = go.GetComponent<SpriteRenderer>();
 
         if (sr.sprite == red) {
             color = 1;
-            //binPosition = binR;
-            binName = "barRed";  //must name exactly this in hirarchy!!!!!!
+            GameObject.Find("barRed").SendMessage("findBox", transform.gameObject);
+            GameObject.Find("barRed").SendMessage("getBin"); //must name exactly this in hirarchy!!!!!!
         } else if (sr.sprite == blue) {
             color = 2;
-            //binPosition = binB;
-            binName = "barBlue";  //must name exactly this in hirarchy!!!!!!
+            GameObject.Find("barBlue").SendMessage("findBox", transform.gameObject);
+            GameObject.Find("barBlue").SendMessage("getBin");  //must name exactly this in hirarchy!!!!!!
         } else if (sr.sprite == green) {
             color = 3;
-            //binPosition = binG;
-            binName = "barGreen";  //must name exactly this in hirarchy!!!!!!
+            GameObject.Find("barGreen").SendMessage("findBox", transform.gameObject);
+            GameObject.Find("barGreen").SendMessage("getBin");//must name exactly this in hirarchy!!!!!!
         } else if (sr.sprite == purple) {
             color = 4;
-            //binPosition = binP;
-            binName = "barPurple";  //must name exactly this in hirarchy!!!!!!
+            GameObject.Find("barPurple").SendMessage("findBox", transform.gameObject);
+            GameObject.Find("barPurple").SendMessage("getBin");  //must name exactly this in hirarchy!!!!!!
         } else if (sr.sprite == orange) {
             color = 5;
-            //binPosition = binO;
-            binName = "barOrange";  //must name exactly this in hirarchy!!!!!!
+            GameObject.Find("barOrange").SendMessage("findBox", transform.gameObject);
+            GameObject.Find("barOrange").SendMessage("getBin");  //must name exactly this in hirarchy!!!!!!
         }
         else { color = -1; }
-        print(transform.gameObject);
-        //GameObject.Find(binName).SendMessage("findBox", transform.gameObject);
-        GameObject.Find("binBlue").SendMessage("getPosition");
+
+        
         selected = false;
         isThis = false;
         if (followTrack)
@@ -68,9 +69,11 @@ public class Touch : MonoBehaviour {
         }
 	}
 
-    void acceptPosition(Vector2 pos)
+    void acceptBin(GameObject bin)
     {
-        binPosition = pos;
+        rightBin = bin;
+        binPosition = bin.transform.position;
+        //print(gameObject + " " + binPosition);
     }
 	void Update () {
         //test++;
@@ -90,14 +93,15 @@ public class Touch : MonoBehaviour {
                 selected = true;
                 if (hit.transform == transform)
                 {
-                    print("hit");
-                    if (overBin()) { GameObject.Find(binName).SendMessage("boxOver", transform.gameObject); }
                     isThis = true;
+                    wasThis = true;
+                    if (overBin() && exists) { rightBin.SendMessage("boxOver", transform.gameObject); }
+                    
                 }
-                else { isThis = false; }
+                else { isThis = false; notThis(); }
                 //Debug.Log("Something hit " + Camera.main.ScreenToWorldPoint(pos));
             }
-            else { selected = false; isThis = false; }
+            else { selected = false; isThis = false; notThis();}
 
         }
         else { selected = false; isThis = false; }
@@ -116,6 +120,7 @@ public class Touch : MonoBehaviour {
 	}
     bool overBin()
     {
+        print("overBin");
         if ((System.Math.Abs(transform.position.x - binPosition.x) <= toleranceX) && ((transform.position.y - binPosition.y) <= toleranceY))
         {
             return true;
@@ -136,12 +141,20 @@ public class Touch : MonoBehaviour {
     }
     void checkColor(int col)
     {
-        bool good = false;
-        while (Input.touchCount < 0) { good = overBin(); }
-        if ((col == color) && good)
+        print("checkColor" + (wasThis));
+
+        if ((col == color) && isThis) 
         {
+            exists = false;
+            while (Input.touchCount < 0) { }
             GameObject.Find("LifeBar").SendMessage("onLifeUp");
             Destroy(gameObject);
         }
+    }
+    void notThis()
+    {
+        float time = Time.time;
+        while (Time.time < time + 5.0f) { }
+        wasThis = false;
     }
 }

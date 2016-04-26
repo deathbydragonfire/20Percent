@@ -4,7 +4,7 @@ using System.Threading;
 
 public class SpawnBoxes : MonoBehaviour {
     int color;
-    GameObject temp;
+    //GameObject temp;
     public bool red = true;
     public bool blue = true;
     public bool green = true;
@@ -111,7 +111,7 @@ public class SpawnBoxes : MonoBehaviour {
                             {
                                 if (green)
                                 {
-                                    temp = (GameObject)Instantiate(greenBox, new Vector3(-8, -1, -1), Quaternion.identity);
+                                    Instantiate(greenBox, new Vector3(-8, -1, -1), Quaternion.identity);
                                     wait = 50;
                                     //temp.SendMessage("setColor", color);
                                     color = -1;
@@ -123,7 +123,7 @@ public class SpawnBoxes : MonoBehaviour {
                             {
                                 if (purple)
                                 {
-                                    temp = (GameObject)Instantiate(purpleBox, new Vector3(-8, -1, -1), Quaternion.identity);
+                                    Instantiate(purpleBox, new Vector3(-8, -1, -1), Quaternion.identity);
                                     wait = 50;
                                     //temp.SendMessage("setColor", color);
                                     color = -1;
@@ -135,7 +135,7 @@ public class SpawnBoxes : MonoBehaviour {
                             {
                                 if (orange)
                                 {
-                                    temp = (GameObject)Instantiate(orangeBox, new Vector3(-8, -1, -1), Quaternion.identity);
+                                    Instantiate(orangeBox, new Vector3(-8, -1, -1), Quaternion.identity);
                                     wait = 50;
                                     //temp.SendMessage("setColor", color);
                                     color = -1;

@@ -4,6 +4,8 @@ using System.Collections;
 public class BinSenseBox : MonoBehaviour {
     SpriteRenderer sr;
     public int binColor;
+    ArrayList boxes = new ArrayList();
+    int count = 0;
     GameObject temp;
 
     void Start()
@@ -20,15 +22,19 @@ public class BinSenseBox : MonoBehaviour {
     }
     void findBox(GameObject box)
     {
+        
         temp = box;
+        boxes.Add(temp);
+        count++;
     }
     void boxOver()
     {
+        print("boxOver");
         temp.SendMessage("checkColor", binColor);
     }
-    void getPosition()
+    void getBin()
     {
-        temp.SendMessage("acceptPosition", transform.position);
+        temp.SendMessage("acceptBin", gameObject);
     }
     
 }
