@@ -5,6 +5,7 @@ using System.Threading;
 public class SpawnBoxes : MonoBehaviour {
     int color;
     //GameObject temp;
+    bool paused = false;
     public bool red = true;
     public bool blue = true;
     public bool green = true;
@@ -72,7 +73,7 @@ public class SpawnBoxes : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (spawnActive)
+        if (spawnActive && !paused)
         {
             color = Random.Range(1, 5);
             int time = Random.Range(1, 1000);
@@ -152,4 +153,12 @@ public class SpawnBoxes : MonoBehaviour {
             }
         }
 	}
+    void onPauseGame()
+    {
+        paused = true;
+    }
+    void onResumeGame()
+    {
+        paused = false;
+    }
 }

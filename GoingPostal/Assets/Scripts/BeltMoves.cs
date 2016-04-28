@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BeltMoves : MonoBehaviour {
     public float speed = 0.1f;
+    bool paused = false;
 
 	// Use this for initialization
 	void Start () {
@@ -11,8 +12,11 @@ public class BeltMoves : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.position.x < 6) { transform.position = new Vector2(transform.position.x + 1.0f * speed, transform.position.y); }
-        else { transform.position = new Vector2(-6, -2.38f); }
+        if (!paused)
+        {
+            if (transform.position.x < 6) { transform.position = new Vector2(transform.position.x + 1.0f * speed, transform.position.y); }
+            else { transform.position = new Vector2(-6, -2.38f); }
+        }
 	}
 
     //methods to be called by other gameobjects
@@ -25,5 +29,13 @@ public class BeltMoves : MonoBehaviour {
     void speedDown()
     {
         speed -= 0.01f;
+    }
+    void onPauseGame()
+    {
+        paused = true;
+    }
+    void onResumeGame()
+    {
+        paused = false;
     }
 }

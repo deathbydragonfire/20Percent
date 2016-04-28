@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Touch : MonoBehaviour {
+    bool paused = false;
     bool exists = true;
     bool wasThis = false;
     SpriteRenderer sr;
@@ -77,46 +78,48 @@ public class Touch : MonoBehaviour {
     }
 	void Update () {
         //test++;
-        
-        RaycastHit hit;
-        if (Input.touchCount > 0) //If there is a touch
+        if (!paused)
         {
-            
-            Vector3 pos = Input.GetTouch(0).position; //Get its position
-            //Debug.Log("Touch " + pos);
-
-            Ray ray = Camera.main.ScreenPointToRay(pos); //check to see if it is colliding with the box
-            if (Physics.Raycast(ray, out hit)) //if it is
+            RaycastHit hit;
+            if (Input.touchCount > 0) //If there is a touch
             {
-                
-                hit.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(pos).x, Camera.main.ScreenToWorldPoint(pos).y); //Move box to that position
-                selected = true;
-                if (hit.transform == transform)
-                {
-                    isThis = true;
-                    wasThis = true;
-                    if (overBin() && exists) { rightBin.SendMessage("boxOver", transform.gameObject); }
-                    
-                }
-                else { isThis = false; notThis(); }
-                //Debug.Log("Something hit " + Camera.main.ScreenToWorldPoint(pos));
-            }
-            else { selected = false; isThis = false; notThis();}
 
+                Vector3 pos = Input.GetTouch(0).position; //Get its position
+                //Debug.Log("Touch " + pos);
+
+                Ray ray = Camera.main.ScreenPointToRay(pos); //check to see if it is colliding with the box
+                if (Physics.Raycast(ray, out hit)) //if it is
+                {
+
+                    hit.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(pos).x, Camera.main.ScreenToWorldPoint(pos).y); //Move box to that position
+                    selected = true;
+                    if (hit.transform == transform)
+                    {
+                        isThis = true;
+                        wasThis = true;
+                        if (overBin() && exists) { rightBin.SendMessage("boxOver", transform.gameObject); }
+
+                    }
+                    else { isThis = false; notThis(); }
+                    //Debug.Log("Something hit " + Camera.main.ScreenToWorldPoint(pos));
+                }
+                else { selected = false; isThis = false; notThis(); }
+
+            }
+            else { selected = false; isThis = false; }
+            if (!isThis) { selected = false; }
+            if ((!selected) && (trackX < 8.5f) && followTrack) //if not selected, on the screen, and movement is enabled
+            {
+                trackX += speed; //Change X by speed
+                transform.position = new Vector2(trackX, trackY); //move box along track
+            }
+            else if (trackX > 8.5f)
+            {
+                GameObject.Find("LifeBar").SendMessage("onLifeDown");
+                Destroy(gameObject);
+            }
+            //Debug.Log(test + " " + selected);
         }
-        else { selected = false; isThis = false; }
-        if (!isThis) { selected = false; }
-        if ((!selected)&&(trackX < 8.5f)&&followTrack) //if not selected, on the screen, and movement is enabled
-        {
-            trackX += speed; //Change X by speed
-            transform.position = new Vector2(trackX, trackY); //move box along track
-        }
-        else if (trackX > 8.5f)
-        {
-            GameObject.Find("LifeBar").SendMessage("onLifeDown");
-            Destroy(gameObject);
-        }
-        //Debug.Log(test + " " + selected);
 	}
     bool overBin()
     {
@@ -156,5 +159,13 @@ public class Touch : MonoBehaviour {
         float time = Time.time;
         while (Time.time < time + 5.0f) { }
         wasThis = false;
+    }
+    void onPauseGame()
+    {
+        paused = true;
+    }
+    void onResumeGame()
+    {
+        paused = false;
     }
 }
