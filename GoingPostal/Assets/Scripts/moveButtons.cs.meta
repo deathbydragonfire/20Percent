@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: f83301dc834a75e469c1af1104089218
-timeCreated: 1459176868
+timeCreated: 1461863213
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - btnTexL: {fileID: 2800000, guid: 696db2eb30b60834b8eafd8d51b4071c, type: 3}
+  - btnTexR: {fileID: 2800000, guid: cfc5f6458ef6392439350c9bf8052904, type: 3}
+  - pauseTex: {fileID: 2800000, guid: c7cb0f0b0454244448cca0207d8ca454, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

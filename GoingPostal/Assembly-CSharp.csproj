@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\BeltMoves.cs" />
      <Compile Include="Assets\Scripts\BinSenseBox.cs" />
      <Compile Include="Assets\Scripts\SpawnBoxes.cs" />
+     <Compile Include="Assets\Scripts\TitleScreen.cs" />
      <Compile Include="Assets\Scripts\Touch.cs" />
      <Compile Include="Assets\Scripts\Utility.cs" />
      <Compile Include="Assets\Scripts\lifeBar.cs" />
