@@ -4,7 +4,6 @@ using System.Collections;
 public class Touch : MonoBehaviour {
     bool paused = false;
     bool exists = true;
-    bool wasThis = false;
     SpriteRenderer sr;
     public Sprite red;
     public Sprite blue;
@@ -74,7 +73,7 @@ public class Touch : MonoBehaviour {
     {
         rightBin = bin;
         binPosition = bin.transform.position;
-        //print(gameObject + " " + binPosition);
+        print(bin + " " + binPosition);
     }
 	void Update () {
         //test++;
@@ -96,14 +95,13 @@ public class Touch : MonoBehaviour {
                     if (hit.transform == transform)
                     {
                         isThis = true;
-                        wasThis = true;
                         if (overBin() && exists) { rightBin.SendMessage("boxOver", transform.gameObject); }
 
                     }
-                    else { isThis = false; notThis(); }
+                    else { isThis = false;}
                     //Debug.Log("Something hit " + Camera.main.ScreenToWorldPoint(pos));
                 }
-                else { selected = false; isThis = false; notThis(); }
+                else { selected = false; isThis = false;}
 
             }
             else { selected = false; isThis = false; }
@@ -144,22 +142,17 @@ public class Touch : MonoBehaviour {
     }
     void checkColor(int col)
     {
-        print("checkColor" + (wasThis));
-
+        print (color + " " + col);
         if ((col == color) && isThis) 
         {
             exists = false;
-            while (Input.touchCount < 0) { }
+            onPauseGame();
             GameObject.Find("LifeBar").SendMessage("onLifeUp");
             Destroy(gameObject);
         }
+
     }
-    void notThis()
-    {
-        float time = Time.time;
-        while (Time.time < time + 5.0f) { }
-        wasThis = false;
-    }
+    
     void onPauseGame()
     {
         paused = true;

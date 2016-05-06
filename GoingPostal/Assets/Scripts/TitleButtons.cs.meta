@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b0590328369980d4884c7c7c23173b70
+timeCreated: 1462153597
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - playTex: {fileID: 2800000, guid: 83ba29c87c745a34f9368c7422f5291d, type: 3}
+  - infoTex: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
