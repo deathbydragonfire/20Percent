@@ -30,13 +30,14 @@ public class TitleScreen : MonoBehaviour {
 	 RaycastHit hit;
      if (Input.touchCount > 0) //If there is a touch
      {
-
+         print("touch");
          Vector3 pos = Input.GetTouch(0).position; //Get its position
          //Debug.Log("Touch " + pos);
 
          Ray ray = Camera.main.ScreenPointToRay(pos); //check to see if it is colliding with the box
          if (Physics.Raycast(ray, out hit)) 
          {
+             print("contact");
              if (hit.transform == transform)
              {
                  if (color < 4) { color++; }

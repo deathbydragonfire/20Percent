@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\TitleScreen.cs" />
      <Compile Include="Assets\Scripts\Touch.cs" />
      <Compile Include="Assets\Scripts\Utility.cs" />
+     <Compile Include="Assets\Scripts\closeInfo.cs" />
      <Compile Include="Assets\Scripts\lifeBar.cs" />
      <Compile Include="Assets\Scripts\moveButtons.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
