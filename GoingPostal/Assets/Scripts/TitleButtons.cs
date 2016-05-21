@@ -7,20 +7,27 @@ public class TitleButtons : MonoBehaviour {
     public Texture infoTex;
     public Transform infoScreen;
     bool infoUp = false;
-	void OnGUI() {
-        if (GUI.Button(new Rect(450, 290, 50, 50), playTex, new GUIStyle())) {
-            SceneManager.LoadScene("testScene");
+    GameObject info;
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(500, 300, 50, 50), playTex, new GUIStyle()))
+        {
+            SceneManager.LoadScene("FirstLevel");
         }
-        if (GUI.Button(new Rect(450, 200, 50, 50), infoTex, new GUIStyle()))
+        if (GUI.Button(new Rect(450, 300, 50, 50), infoTex, new GUIStyle()))
         {
             if (!infoUp)
             {
-                Instantiate(infoScreen, new Vector3(0, 0, 0), Quaternion.identity);
+                Instantiate(infoScreen, new Vector3(0, .4f, 0), Quaternion.identity);
+                infoUp = true;
+            }
+            else { info.SendMessage("onInfoClose", SendMessageOptions.DontRequireReceiver);
+            infoUp = false;
             }
         }
     }
-    void closeInfo()
+    void catchInfo(GameObject inform)
     {
-        infoUp = false;
+        info = inform;
     }
 }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Touch : MonoBehaviour {
+public class Touch : MonoBehaviour
+{
     bool paused = false;
     bool exists = true;
     SpriteRenderer sr;
@@ -12,11 +13,6 @@ public class Touch : MonoBehaviour {
     public Sprite orange;
     GameObject rightBin;
     int color;
-    /* public Vector2 binR;
-    public Vector2 binB;
-    public Vector2 binG;
-    public Vector2 binP;
-    public Vector2 binO; */
     Vector2 binPosition;
     public float toleranceX;
     public float toleranceY;
@@ -28,37 +24,41 @@ public class Touch : MonoBehaviour {
     public float speed = 0.1f; //Speed of box while following track (Should be same as track speed for best result)
 
 
-   
-
-	void Start () {
-       
+    void Start()
+    {
         GameObject go = transform.gameObject;
         sr = go.GetComponent<SpriteRenderer>();
-
-        if (sr.sprite == red) {
+        if (sr.sprite == red)
+        {
             color = 1;
             GameObject.Find("barRed").SendMessage("findBox", transform.gameObject);
             GameObject.Find("barRed").SendMessage("getBin"); //must name exactly this in hirarchy!!!!!!
-        } else if (sr.sprite == blue) {
+        }
+        else if (sr.sprite == blue)
+        {
             color = 2;
             GameObject.Find("barBlue").SendMessage("findBox", transform.gameObject);
             GameObject.Find("barBlue").SendMessage("getBin");  //must name exactly this in hirarchy!!!!!!
-        } else if (sr.sprite == green) {
+        }
+        else if (sr.sprite == green)
+        {
             color = 3;
             GameObject.Find("barGreen").SendMessage("findBox", transform.gameObject);
             GameObject.Find("barGreen").SendMessage("getBin");//must name exactly this in hirarchy!!!!!!
-        } else if (sr.sprite == purple) {
+        }
+        else if (sr.sprite == purple)
+        {
             color = 4;
             GameObject.Find("barPurple").SendMessage("findBox", transform.gameObject);
             GameObject.Find("barPurple").SendMessage("getBin");  //must name exactly this in hirarchy!!!!!!
-        } else if (sr.sprite == orange) {
+        }
+        else if (sr.sprite == orange)
+        {
             color = 5;
             GameObject.Find("barOrange").SendMessage("findBox", transform.gameObject);
             GameObject.Find("barOrange").SendMessage("getBin");  //must name exactly this in hirarchy!!!!!!
         }
         else { color = -1; }
-
-        
         selected = false;
         isThis = false;
         if (followTrack)
@@ -67,42 +67,34 @@ public class Touch : MonoBehaviour {
             trackY = Random.Range(-2.3f, -1.1f); //Sets starting Y position between -2.3 and -1
             transform.position = new Vector3(trackX, trackY, 1 - trackY);
         }
-	}
-
-    void acceptBin(GameObject bin)
-    {
-        rightBin = bin;
-        binPosition = bin.transform.position;
-        print(bin + " " + binPosition);
     }
-	void Update () {
+
+
+
+
+   
+    void Update()
+    {
         //test++;
         if (!paused)
         {
             RaycastHit hit;
             if (Input.touchCount > 0) //If there is a touch
             {
-
                 Vector3 pos = Input.GetTouch(0).position; //Get its position
-                //Debug.Log("Touch " + pos);
-
                 Ray ray = Camera.main.ScreenPointToRay(pos); //check to see if it is colliding with the box
                 if (Physics.Raycast(ray, out hit)) //if it is
                 {
-
                     hit.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(pos).x, Camera.main.ScreenToWorldPoint(pos).y); //Move box to that position
                     selected = true;
                     if (hit.transform == transform)
                     {
                         isThis = true;
                         if (overBin() && exists) { rightBin.SendMessage("boxOver", transform.gameObject); }
-
                     }
-                    else { isThis = false;}
-                    //Debug.Log("Something hit " + Camera.main.ScreenToWorldPoint(pos));
+                    else { isThis = false; }
                 }
-                else { selected = false; isThis = false;}
-
+                else { selected = false; isThis = false; }
             }
             else { selected = false; isThis = false; }
             if (!isThis) { selected = false; }
@@ -116,9 +108,18 @@ public class Touch : MonoBehaviour {
                 GameObject.Find("LifeBar").SendMessage("onLifeDown");
                 Destroy(gameObject);
             }
-            //Debug.Log(test + " " + selected);
         }
-	}
+    }
+
+    void OnBecameVisible()
+    {
+        Camera.main.SendMessage("newBox", gameObject);
+    }
+
+    //methods to be called by other GameObjects
+
+
+
     bool overBin()
     {
         print("overBin");
@@ -129,21 +130,26 @@ public class Touch : MonoBehaviour {
         else { return false; }
     }
 
-    //methods to be called by other gameObjects
+    
 
-    void speedUp()
+
+
+
+
+    void speedSet(float sp)
     {
-        speed += .01f;
+        speed = sp;
     }
 
-    void speedDown()
-    {
-        speed -= .01f;
-    }
+
+
+
+
+
     void checkColor(int col)
     {
-        print (color + " " + col);
-        if ((col == color) && isThis) 
+        print(color + " " + col);
+        if ((col == color) && isThis)
         {
             exists = false;
             onPauseGame();
@@ -152,11 +158,26 @@ public class Touch : MonoBehaviour {
         }
 
     }
-    
+
+
+
+
+    void acceptBin(GameObject bin)
+    {
+        rightBin = bin;
+        binPosition = bin.transform.position;
+        print(bin + " " + binPosition);
+    }
+
+
+
+
+
     void onPauseGame()
     {
         paused = true;
     }
+
     void onResumeGame()
     {
         paused = false;

@@ -35,4 +35,3 @@ C:\Users\Hanna\Documents\gitHubStuff\20Percent\GoingPostal\Temp\bin\Debug\UnityE
 C:\Users\Hanna\Documents\gitHubStuff\20Percent\GoingPostal\obj\Debug\Assembly-CSharp-Editor.csprojResolveAssemblyReference.cache
 C:\Users\Hanna\Documents\gitHubStuff\20Percent\GoingPostal\obj\Debug\Assembly-CSharp-Editor.dll
 C:\Users\Hanna\Documents\gitHubStuff\20Percent\GoingPostal\obj\Debug\Assembly-CSharp-Editor.pdb
-C:\Users\Hanna\Documents\gitHubStuff\20Percent\GoingPostal\Temp\bin\Debug\Assembly-CSharp.pdb

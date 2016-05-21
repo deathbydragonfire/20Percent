@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class lifeBar : MonoBehaviour {
     
     //sprite references
+    int scene = 1;
     int life = 20;
+    int score = 0;
+    int scoreLimit = 5;
+    public int nextSceneScore = 100;
     SpriteRenderer sr;
     Sprite[] sprites = new Sprite[21];
     public Sprite full;
@@ -67,10 +72,25 @@ public class lifeBar : MonoBehaviour {
     }
     void onLifeUp()
     {
+       
         if (life < 20)
         {
             life++;
             sr.sprite = sprites[life];
+        }
+        if (score < scoreLimit)
+        {
+            score++;
+        }
+        else
+        {
+            Camera.main.SendMessage("speedUp");
+            scoreLimit += (score + 5);
+        }
+        if (score > nextSceneScore && nextSceneScore != -1)
+        {
+            scene++;
+            SceneManager.LoadScene(scene);
         }
     }
 }

@@ -90,7 +90,6 @@ public class SpawnBoxes : MonoBehaviour {
                                 {
                                     Instantiate(redBox, new Vector3(-8, -1, -1), Quaternion.identity);
                                     wait = 50;
-                                    //temp.SendMessage("setColor", color);
                                     color = -1;
                                 }
                                 else { color = Random.Range(1, 5); }
@@ -102,7 +101,6 @@ public class SpawnBoxes : MonoBehaviour {
                                 {
                                     Instantiate(blueBox, new Vector3(-8, -1, -1), Quaternion.identity);
                                     wait = 50;
-                                    //temp.SendMessage("setColor", color);
                                     color = -1;
                                 }
                                 else { color = Random.Range(1, 5); }
@@ -114,7 +112,6 @@ public class SpawnBoxes : MonoBehaviour {
                                 {
                                     Instantiate(greenBox, new Vector3(-8, -1, -1), Quaternion.identity);
                                     wait = 50;
-                                    //temp.SendMessage("setColor", color);
                                     color = -1;
                                 }
                                 else { color = Random.Range(1, 5); }
@@ -126,7 +123,6 @@ public class SpawnBoxes : MonoBehaviour {
                                 {
                                     Instantiate(purpleBox, new Vector3(-8, -1, -1), Quaternion.identity);
                                     wait = 50;
-                                    //temp.SendMessage("setColor", color);
                                     color = -1;
                                 }
                                 else { color = Random.Range(1, 5); }
@@ -138,7 +134,6 @@ public class SpawnBoxes : MonoBehaviour {
                                 {
                                     Instantiate(orangeBox, new Vector3(-8, -1, -1), Quaternion.identity);
                                     wait = 50;
-                                    //temp.SendMessage("setColor", color);
                                     color = -1;
                                 }
                                 else { color = Random.Range(1, 5); }

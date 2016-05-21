@@ -22,14 +22,9 @@ public class BeltMoves : MonoBehaviour {
 
     //methods to be called by other gameobjects
 
-    void speedUp()
-    {
-        speed += 0.01f;
-    }
-
-    void speedDown()
-    {
-        speed -= 0.01f;
+    void speedSet(float sp)
+    { 
+        speed = sp; 
     }
     void onPauseGame()
     {
